@@ -1,0 +1,24 @@
+.product-manage{
+    padding-top: 23vw;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.product-manage .navbar-list li a {
+    display: block;
+    color: #FFF;
+    font-size: 16px;
+    padding: 5px 0;
+}
+
+.admin-page{
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.admin-page .navbar-list li a {
+    display: block;
+    color: #FFF;
+    font-size: 16px;
+    padding: 5px 0;
+}

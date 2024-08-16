@@ -1,0 +1,132 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <h4>註冊:</h4>
+    <hr />
+    <div class="container-fluid w-50">
+      <div class="row">
+        @if (!isSuccessful){
+        <form
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="username">帳號</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              [(ngModel)]="form.username"
+              required
+              minlength="3"
+              maxlength="20"
+              #username="ngModel"
+              placeholder="帳號最少3個字，最多20個字"
+              [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+            />
+            @if(username.errors && f.submitted){
+            <div class="invalid-feedback">
+              @if(username.errors['required']){
+              <div>此欄位必填</div>
+              } @if(username.errors['minlength']){
+              <div>帳號最少要有3個字</div>
+              } @if(username.errors['maxlength']){
+              <div>帳號最多20個字</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="email">信箱</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              [(ngModel)]="form.email"
+              required
+              email
+              #email="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+            />
+            @if(email.errors && f.submitted){
+            <div class="invalid-feedback">
+              @if(email.errors['required']){
+              <div>此欄位必填</div>
+              } @if(email.errors['email']){
+              <div>信箱必須符合有效的格式</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="password">密碼</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              [(ngModel)]="form.password"
+              required
+              minlength="6"
+              #password="ngModel"
+              placeholder="密碼最少6個字"
+              [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+            />
+            @if(password.errors && f.submitted){
+            <div class="invalid-feedback">
+              @if(password.errors['required']){
+              <div>此欄位必填</div>
+              } @if(password.errors['minlength']){
+              <div>密碼至少要6個字</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="cellphone">手機</label>
+            <input
+              type="text"
+              class="form-control"
+              name="cellphone"
+              [(ngModel)]="form.cellphone"
+              required
+              minlength="10"
+              #cellphone="ngModel"
+              placeholder="手機格式: 0911234567"
+              [ngClass]="{ 'is-invalid': f.submitted && cellphone.errors }"
+            />
+            @if(cellphone.errors && f.submitted){
+            <div class="invalid-feedback">
+              @if(cellphone.errors['required']){
+              <div>此欄位必填</div>
+              } @if(cellphone.errors['minlength']){
+              <div>手機最少需10個字</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-block mt-2">註冊</button>
+          </div>
+
+          @if(f.submitted && isSignUpFailed){
+          <div class="alert alert-warning">
+            註冊失敗 <br />
+            {{ errorMessage }}
+          </div>
+          }
+        </form>
+        } @else{
+        <div class="alert alert-success">您已註冊成功</div>
+        <button routerLink="/login" class="btn btn-primary btn-sm w-25 mx-auto">
+          會員登入
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

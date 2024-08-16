@@ -1,0 +1,39 @@
+<div class="menu-sidebar-content js-scrollbar1">
+  <nav class="navbar-sidebar">
+    <ul class="list-unstyled navbar-list">
+      <li>
+        <a routerLink="/products">所有商品</a>
+      </li>
+      <li *ngFor="let tempProductCategory of productCategories">
+        <a
+          routerLink="/category/{{ tempProductCategory.id }}/{{
+            tempProductCategory.categoryName
+          }}"
+          routerLinkActive="active-link"
+          >{{ tempProductCategory.categoryName }}</a
+        >
+      </li>
+    </ul>
+  </nav>
+
+  @if(isEmployee || isAdmin){
+  <nav class="product-manage">
+    <ul class="list-unstyled navbar-list">
+      <li>
+        <a routerLink="/employee" class="btn btn-primary"
+          >商品管理<br />(員工權限)</a
+        >
+      </li>
+    </ul>
+  </nav>
+  }
+  <!-- @if(isAdmin){
+  <nav class="admin-page">
+    <ul class="list-unstyled navbar-list">
+      <li>
+        <a routerLink="/admin" class="btn btn-success">管理者頁面</a>
+      </li>
+    </ul>
+  </nav>
+  } -->
+</div>

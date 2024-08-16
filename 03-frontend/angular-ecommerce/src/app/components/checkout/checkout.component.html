@@ -1,0 +1,331 @@
+<div class="main-content page-m">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+        <!-- customer form group -->
+        <div formGroupName="customer" class="form-area">
+          <h3>訂購人資料</h3>
+
+          <div class="row">
+            <div class="col-md-2"><label>訂購人姓名</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="name" type="text" />
+
+                <div
+                  *ngIf="
+                    customerName?.invalid &&
+                    (customerName!.dirty || customerName!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="customerName?.errors?.['required'] || customerName?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+
+                  <div *ngIf="customerName?.errors?.['minlength']">
+                    此欄位至少填寫兩個字
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>電子郵件</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="email" type="text" />
+
+                <div
+                  *ngIf="
+                    customerEmail?.invalid &&
+                    (customerEmail!.dirty || customerEmail!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="customerEmail?.errors?.['required']">
+                    此欄位必填
+                  </div>
+
+                  <div *ngIf="customerEmail?.errors?.['pattern']">
+                    Email必須符合格式
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>手機</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="cellphone" type="text" />
+
+                <div
+                  *ngIf="
+                    customerCellphone?.invalid &&
+                    (customerCellphone!.dirty || customerCellphone!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="customerCellphone?.errors?.['required'] || customerCellphone?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+
+                  <div *ngIf="customerCellphone?.errors?.['pattern']">
+                    此欄位需填寫手機號碼
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 同訂購人按鈕 複製姓名跟手機 TODO-->
+        <div class="input-space">
+          <label class="au-checkbox">
+            <input type="checkbox" (change)="copyCustomerToReceiver($event)" />
+            <span class="au-checkmark"></span>同訂購人
+          </label>
+        </div>
+
+        <!-- 收件人資訊 -->
+        <div formGroupName="receiver" class="form-area">
+          <h3>收件人資訊</h3>
+
+          <div class="row">
+            <div class="col-md-2"><label>收件人姓名</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="name" type="text" />
+
+                <div
+                  *ngIf="
+                    receiverName?.invalid &&
+                    (receiverName!.dirty || receiverName!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="receiverName?.errors?.['required'] || receiverName?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+
+                  <div *ngIf="receiverName?.errors?.['minlength']">
+                    此欄位至少填寫兩個字
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>電子郵件</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="email" type="text" />
+
+                <div
+                  *ngIf="
+                    receiverEmail?.invalid &&
+                    (receiverEmail!.dirty || receiverEmail!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="receiverEmail?.errors?.['required']">
+                    此欄位必填
+                  </div>
+
+                  <div *ngIf="receiverEmail?.errors?.['pattern']">
+                    Email必須符合格式
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>手機</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="cellphone" type="text" />
+
+                <div
+                  *ngIf="
+                    receiverCellphone?.invalid &&
+                    (receiverCellphone!.dirty || receiverCellphone!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="receiverCellphone?.errors?.['required'] || receiverCellphone?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+
+                  <div *ngIf="receiverCellphone?.errors?.['pattern']">
+                    此欄位需填寫手機號碼
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>地址</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="address" type="text" />
+
+                <div
+                  *ngIf="
+                    receiverAddress?.invalid &&
+                    (receiverAddress!.dirty || receiverAddress!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="receiverAddress?.errors?.['required'] || receiverAddress?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Credit Card -->
+        <div formGroupName="creditCard" class="form-area">
+          <h3>信用卡</h3>
+
+          <div class="row">
+            <div class="col-md-2"><label>卡片類型</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="cardType">
+                  <option>Visa</option>
+                  <option>Mastercard</option>
+                </select>
+
+                <div
+                  *ngIf="
+                    creditCardType?.invalid &&
+                    (creditCardType!.dirty || creditCardType!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div *ngIf="creditCardType?.errors?.['required']">
+                    Ccredit Card Type is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label>信用卡號</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="cardNumber" type="text" />
+
+                <div
+                  *ngIf="
+                    creditCardNumber?.invalid &&
+                    (creditCardNumber!.dirty || creditCardNumber!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="creditCardNumber?.errors?.['required'] || creditCardNumber?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                  <div *ngIf="creditCardNumber?.errors?.['pattern']">
+                    信用卡號必須是16個數字
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>安全碼</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input formControlName="securityCode" type="text" />
+                <div
+                  *ngIf="
+                    creditCardSecurityCode?.invalid &&
+                    (creditCardSecurityCode!.dirty ||
+                      creditCardSecurityCode!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="creditCardSecurityCode?.errors?.['required'] || creditCardSecurityCode?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                  <div *ngIf="creditCardSecurityCode?.errors?.['pattern']">
+                    安全碼必須是3個數字
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>有效月份</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="expirationMonth">
+                  <option *ngFor="let month of creditCardMonths">
+                    {{ month }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2"><label>有效年份</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select
+                  formControlName="expirationYear"
+                  (change)="handleMonthsAndYears()"
+                >
+                  <option *ngFor="let year of creditCardYears">
+                    {{ year }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order details -->
+        <div class="form-area">
+          <h3>本次購物費用明細如下</h3>
+
+          <p>總數量: {{ totalQuantity }}</p>
+          <p>運費: 0</p>
+          <p>
+            總金額: {{ totalPrice | currency : "TWD" : "symbol" : "1.0-0" }}
+          </p>
+        </div>
+
+        <!-- submit button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-info">確認結帳</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

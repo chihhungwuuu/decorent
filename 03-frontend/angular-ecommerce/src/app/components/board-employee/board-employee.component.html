@@ -1,0 +1,107 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    @if(isLoggedIn && (isEmployee || isAdmin)){
+    <h4>商品管理:</h4>
+    <hr />
+    <button
+      type="button"
+      class="btn btn-primary mb-3"
+      routerLink="/product-add"
+    >
+      新增商品
+    </button>
+    <div class="container-fluid">
+      <div class="row">
+        <table class="table table-bordered border-primary">
+          <thead>
+            <tr>
+              <th scope="col">編號</th>
+              <th scope="col">SKU</th>
+              <th scope="col">圖片</th>
+              <th scope="col">名稱</th>
+              <th scope="col">金額</th>
+              <th colspan="2">商品更改</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(tempProduct of products; track tempProduct.id){
+            <tr>
+              <td>{{ tempProduct.id }}</td>
+              <td>{{ tempProduct.sku }}</td>
+              <td>
+                <a routerLink="/products/{{ tempProduct.id }}">
+                  <img
+                    src="{{ tempProduct.imageUrl }}"
+                    class="img-responsive"
+                    style="width: 270px"
+                  />
+                </a>
+              </td>
+              <td>{{ tempProduct.name }}</td>
+              <td>{{ tempProduct.unitPrice }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  routerLink="/product-update/{{ tempProduct.id }}"
+                >
+                  商品更改
+                </button>
+              </td>
+            </tr>
+            } @empty {
+            <td>這裡沒有商品</td>
+            }
+          </tbody>
+        </table>
+
+        <!-- begin footer -->
+        <div class="footer-pagination">
+          <div class="row">
+            <div class="col-md-6"></div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-9" style="padding-left: 30%">
+                  <ngb-pagination
+                    [(page)]="thePageNumber"
+                    [pageSize]="thePageSize"
+                    [collectionSize]="theTotalElements"
+                    [maxSize]="5"
+                    [boundaryLinks]="true"
+                    (pageChange)="handleListProducts()"
+                  >
+                  </ngb-pagination>
+                </div>
+
+                <div class="col-md-3 mt-2" style="text-align: right">
+                  <span class="mr-2">Page Size</span>
+
+                  <select
+                    #myPageSelect
+                    (change)="updatePageSize(myPageSelect.value)"
+                  >
+                    <option>2</option>
+                    <option selected="true">5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    } @else {
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="alert alert-warning col-md-12" role="alert">請登入會員</div>
+      </div>
+    </div>
+
+    }
+  </div>
+</div>

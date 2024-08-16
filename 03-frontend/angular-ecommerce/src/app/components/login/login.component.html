@@ -1,0 +1,89 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <h4>登入:</h4>
+    <hr />
+    <div class="container-fluid w-50">
+      <div class="row">
+        @if (!isLoggedIn){
+        <form
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate
+        >
+          <div class="form-group">
+            <label for="username">帳號</label>
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              [(ngModel)]="form.username"
+              required
+              minlength="3"
+              maxlength="20"
+              #username="ngModel"
+              placeholder="帳號最少3個字，最多20個字"
+              [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
+            />
+            @if(username.errors && f.submitted){
+            <div class="invalid-feedback">
+              @if(username.errors['required']){
+              <div>此欄位必填</div>
+              } @if(username.errors['minlength']){
+              <div>帳號最少要有3個字</div>
+              } @if(username.errors['maxlength']){
+              <div>帳號最多20個字</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="password">密碼</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              [(ngModel)]="form.password"
+              required
+              minlength="6"
+              #password="ngModel"
+              placeholder="密碼最少6個字"
+              [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+            />
+            @if(password.errors && f.submitted){
+            <div class="invalid-feedback">
+              @if(password.errors['required']){
+              <div>此欄位必填</div>
+              } @if(password.errors['minlength']){
+              <div>密碼至少要6個字</div>
+              }
+            </div>
+            }
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary btn-block mt-2">登入</button>
+          </div>
+
+          <div class="form-group">
+            @if(f.submitted && isLoginFailed){
+            <div class="alert alert-danger" role="alert">
+              登入失敗: {{ errorMessage }}
+            </div>
+            }
+          </div>
+        </form>
+        } @else{
+        <div class="alert alert-success">您已成功登入</div>
+        <button
+          routerLink="/products"
+          class="btn btn-primary btn-sm w-25 mx-auto"
+        >
+          回到首頁
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

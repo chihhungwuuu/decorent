@@ -1,0 +1,9 @@
+<div class="cart-area d-n">
+  <a routerLink="/cart-details">
+    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    <div class="total" style="margin-left: 5px">
+      {{ totalPrice | currency : "TWD" : "symbol" : "1.0-0" }}
+      <span>{{ totalQuantity }}</span>
+    </div>
+  </a>
+</div>

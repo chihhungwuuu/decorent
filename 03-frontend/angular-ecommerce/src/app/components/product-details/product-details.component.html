@@ -1,0 +1,19 @@
+<div class="detail-section">
+  <div class="container-fluid">
+    <img src="{{ product.imageUrl }}" class="detail-img" />
+
+    <h3>{{ product.name }}</h3>
+    <div class="price">
+      {{ product.unitPrice | currency : "TWD" : "symbol" : "1.0-0" }}
+    </div>
+    <button (click)="addToCart()" class="btn btn-primary btn-sm">
+      加入購物車
+    </button>
+
+    <hr />
+    <h4>商品描述</h4>
+    <p>{{ product.description }}</p>
+
+    <a routerLink="/products" class="mt-5">回到首頁</a>
+  </div>
+</div>

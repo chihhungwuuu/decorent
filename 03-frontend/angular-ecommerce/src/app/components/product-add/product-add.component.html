@@ -1,0 +1,226 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    @if(isEmployee){
+    <h4>新增商品:</h4>
+    <hr />
+    <div class="container-fluid w-50">
+      <div class="row">
+        @if (!isSuccessful){
+        <form [formGroup]="productAddFormGroup" (ngSubmit)="onSubmit()">
+          <div formGroupName="product">
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <label for="category_id">商品類別:</label>
+              </div>
+              <div class="col-md-9">
+                <select formControlName="category_id" class="w-50">
+                  <option value="1">沙發</option>
+                  <option value="2">櫃子</option>
+                  <option value="3">桌子</option>
+                  <option value="4">椅子</option>
+                </select>
+
+                <div
+                  *ngIf="
+                    category_id?.invalid &&
+                    (category_id!.dirty || category_id!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="category_id?.errors?.['required'] || category_id?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <label for="sku">SKU:</label>
+              </div>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  formControlName="sku"
+                  class="w-50"
+                  placeholder="最少填寫3個字"
+                />
+                <div
+                  *ngIf="sku?.invalid && (sku!.dirty || sku!.touched)"
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="sku?.errors?.['required'] || sku?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                  <div *ngIf="sku?.errors?.['minlength']">
+                    此欄位至少填寫三個字
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <label for="name">商品名稱:</label>
+              </div>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="w-50"
+                  placeholder="最少填寫3個字"
+                />
+                <div
+                  *ngIf="name?.invalid && (name!.dirty || name!.touched)"
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="name?.errors?.['required'] || name?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                  <div *ngIf="name?.errors?.['minlength']">
+                    此欄位至少填寫三個字
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <label for="description">商品描述:</label>
+              </div>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  formControlName="description"
+                  class="w-50"
+                  placeholder="最少填寫3個字"
+                />
+                <div
+                  *ngIf="
+                    description?.invalid &&
+                    (description!.dirty || description!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="description?.errors?.['required'] || description?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                  <div *ngIf="description?.errors?.['minlength']">
+                    此欄位至少填寫三個字
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <label for="unitPrice">商品價錢:</label>
+              </div>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  formControlName="unitPrice"
+                  class="w-50"
+                  placeholder="填寫數字"
+                />
+                <div
+                  *ngIf="
+                    unitPrice?.invalid &&
+                    (unitPrice!.dirty || unitPrice!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="unitPrice?.errors?.['required'] || unitPrice?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <span>是否啟用:</span>
+              </div>
+              <div class="col-md-9">
+                <input
+                  type="radio"
+                  value="true"
+                  formControlName="isActive"
+                  id="yes"
+                />
+                <label for="yes" style="margin-right: 20px">是</label>
+                <input
+                  type="radio"
+                  value="false"
+                  formControlName="isActive"
+                  id="no"
+                />
+                <label for="no">否</label>
+                <div
+                  *ngIf="
+                    isActive?.invalid && (isActive!.dirty || isActive!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="isActive?.errors?.['required'] || isActive?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-2">
+                <label for="unitsInStock">商品庫存:</label>
+              </div>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  formControlName="unitsInStock"
+                  class="w-50"
+                  placeholder="填寫數字"
+                />
+                <div
+                  *ngIf="
+                    unitsInStock?.invalid &&
+                    (unitsInStock!.dirty || unitsInStock!.touched)
+                  "
+                  class="alert alert-danger mt-1"
+                >
+                  <div
+                    *ngIf="unitsInStock?.errors?.['required'] || unitsInStock?.errors?.['notOnlyWhitespace']"
+                  >
+                    此欄位必填
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-block mt-2">新增商品</button>
+          </div>
+        </form>
+        }
+      </div>
+    </div>
+    }@else {
+    <div class="container-fluid">
+      <div class="row">
+        <div class="alert alert-warning col-md-12" role="alert">請登入會員</div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
