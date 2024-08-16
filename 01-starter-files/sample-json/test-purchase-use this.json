@@ -1,0 +1,31 @@
+{
+   "customer":{
+      "name":"afasa",
+      "email":"afasa@test.com",
+	  "cellphone":"0911555242"
+   },
+   "receiver":{
+      "name":"afasa",
+      "email":"afasa@test.com",
+      "cellphone":"0911555242",
+      "address":"Canada"
+   },
+   "order":{
+      "totalPrice":36,
+      "totalQuantity":2
+   },
+   "orderItems":[
+      {
+         "imageUrl":"assets/images/products/sofas/sofa-1001.png",
+         "quantity":1,
+         "unitPrice":1899,
+         "productId":1
+      },
+      {
+         "imageUrl":"assets/images/products/sofas/sofa-1003.png",
+         "quantity":1,
+         "unitPrice":1799,
+         "productId":3
+      }
+   ]
+}
