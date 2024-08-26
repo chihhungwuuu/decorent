@@ -15,7 +15,10 @@
 ## 如何安裝? 如何使用
 ## 網站Demo
 -->
-
+## 安裝說明
+1. git clone https://github.com/chihhungwuuu/decorent.git
+2. backend資料夾裡的application.properties設定資料庫連線
+3. 前端啟動專案: `ng serve --port 8088 --open`
 
 ## 網站介紹
 ### 首頁
